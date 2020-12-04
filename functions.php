@@ -55,9 +55,11 @@ function displayItem3()
 displayItem3();
 ?>
 */
-<?php
-function displayItem(['Nom']) {
-echo $item1;
+
+function displayItem($nom, $prix, $photo)
+{
+    echo $nom . "\n";
+    echo $prix;
+    echo "<img src=" . $photo . ">";
 }
-displayItem($item1);
 ?>

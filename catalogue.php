@@ -10,6 +10,7 @@
 
 
     <?php
+    include("functions.php");
     // Comme la page item.php, on reprend nos articles (nom/image/prix) dans un tableaux, comprenant lui même plusieurs tableaux, 1 par article
 
     //$item = ['Nom', 'photo', 'prix'];
@@ -38,10 +39,7 @@
 
     foreach ($items as $item) { //On appel dans notre boucle notre tableau $articles et on créé une autre $variable temporaire qui ne marche QUE dans cette fonction car elle n'est pas en global //Ensuite on lui demande d'imprimer, à chaque itération, le Nom, le prix et la photo de chaque article
 
-
-        echo $item['Nom'] . "\n";
-        echo $item['prix'];
-        echo "<img src=" . $item['photo'] . ">";
+        displayItem($item['Nom'], $item['prix'], $item['photo']);
     }
     ?>
 
