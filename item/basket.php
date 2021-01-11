@@ -5,9 +5,9 @@ global $items; // "import" de la variable dans ce fichier
 //var_dump($_POST['qt']);
 ?>
 <?php foreach ($items as  $index => $item) { ?>
-    <?php echo $item["Nom"]; ?><br>
-    <?php echo $item["photo"]; ?> m<br>
-    <?php echo $item["prix"]; ?> €<br>
+    <?php echo $item["name"]; ?><br>
+    <?php echo $item["picture"]; ?> m<br>
+    <?php echo $item["price"]; ?> €<br>
     <input type="number" name="qt[<?php echo $index; ?>]" value="">
     <!-- ici on a pas le droit de fixer la value -->
     <hr>
@@ -17,8 +17,8 @@ foreach ($_POST['quantity'] as $index => $quantity) {
     // var_dump($index); // On debug
     //var_dump($quantity); // On debug
     $item = $items[$index];
-    echo $item['Nom'] . ' : ' . $quantity . '<br>';
-    echo $item['prix'] * $quantity . ' €';
+    echo $item['name'] . ' : ' . $quantity . '<br>';
+    echo $item['price'] * $quantity . ' €';
     echo '<br>';
 }
 ?>

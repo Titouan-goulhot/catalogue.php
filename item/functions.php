@@ -1,6 +1,6 @@
 
 <?php
-/*$item1 = //Déclaration de notre tableau
+$item1 = //Déclaration de notre tableau
     [ //displayItem1()
         'Nom' => 'Willy Roller 2006',
         'photo' => "https://s2.qwant.com/thumbr/0x380/4/2/3691c2fc336782290febaab599a4afc92a8f6aba6ba61957925d5655de67c0/econome-moderne-horizontal-publicitaire-personnalisable-0434944.jpg?u=https%3A%2F%2Fwww.vegea.com%2FDos-Imgs%2Feconome-moderne-horizontal-publicitaire-personnalisable-0434944.jpg&q=0&b=1&p=0&a=1",
@@ -56,10 +56,32 @@ displayItem3();
 ?>
 */
 
-function displayItem($nom, $prix, $photo)
+
+function displayItemAvailable($nom, $prix, $photo, $quantity)
+{
+
+    echo "<p><Strong>Produits</Strong>" . $nom . "<br />" . $photo . "<br />";
+    echo "Le Prix de cet article est de : " . $prix . "€, disponible en " . $quantity. " Exemplaires </p>";
+
+}
+
+
+function displayItemNotAvailable($nom, $prix, $photo)
 {
     echo $nom . "\n";
     echo $prix;
     echo "<img src=" . $photo . ">";
 }
+
+
+
+
+function displayCat($catalogue)
+{
+    
+
+}
+
 ?>
+
+
