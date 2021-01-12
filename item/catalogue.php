@@ -1,84 +1,88 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Ceci est une page de test avec des balises PHP</title>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <title>Shopping Cart</title>
+    <!-- Font Awsome -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <!--Boostrap CDN-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 </head>
 
 <body>
-    <form action="basket.php" method="POST">
-
-        <?php
-
-        // Comme la page item.php, on reprend nos articles (nom/image/prix) dans un tableaux, comprenant lui même plusieurs tableaux, 1 par article
-
-        //$item = ['Nom', 'photo', 'prix'];
-        include("functions.php");
-        ?>
+    <div class="container">
+        <div class="row text-center py-5">
+            <h1>Bienvenue sur notre catalogue :</h1>
+        </div>
+    </div>
 
 
 
+</body>
 
-        <?php //Tableau d'articles
-        $items =
-            [ //Déclaration de notre tableau
-                [ //displayItem1()
-                    'name' => 'Willy Roller 2006',
-                    'picture' => "https://s2.qwant.com/thumbr/0x380/4/2/3691c2fc336782290febaab599a4afc92a8f6aba6ba61957925d5655de67c0/econome-moderne-horizontal-publicitaire-personnalisable-0434944.jpg?u=https%3A%2F%2Fwww.vegea.com%2FDos-Imgs%2Feconome-moderne-horizontal-publicitaire-personnalisable-0434944.jpg&q=0&b=1&p=0&a=1",
-                    'price' => 14.99
-                ],
-                [ //displayItem2()
-                    'name' => 'Econome Gefu',
-                    'picture' => "https://s2.qwant.com/thumbr/0x380/d/4/c12fa1fe29be99df7c80fabefe061eddf2426d891bc9032bb088bdc36efee1/econome-10_781317.jpg?u=https%3A%2F%2Fcdn.habitat.fr%2Fthumbnails%2Fproduct%2F781%2F781317%2Fbox%2F1200%2F1200%2F80%2Feconome-10_781317.jpg&q=0&b=1&p=0&a=1",
-                    'price' => 19.99
+</html>
+<?php
 
-                ],        [ //displayItem3()
-                    'name' => 'Zyliss',
-                    'picture' => "https://s1.qwant.com/thumbr/0x380/3/5/281e7235409f38bff8aa18706d9f739e2184b5c0c73b9d8a06833ad86faa10/econome-gefu-primeline-acier-inox-pointe-aiguisee.jpg?u=https%3A%2F%2Fmedia1.couteauxduchef.com%2F33531%2Feconome-gefu-primeline-acier-inox-pointe-aiguisee.jpg&q=0&b=1&p=0&a=1",
-                    'price' => 25.99
-                ],
-            ];
-        ?>
+include_once('functions.php');
+include_once('class_catalogue.php');
+include_once('class_articles.php');
+include_once('basket.php');
 
 
 
-        <?php //Condition Tableau
-        $selections = [];
-        $total = 0;
-        if (isset($_GET['name'])) {
-            foreach ($_GET['name'] as $item) {
-                if (isset($items[$item])) {
-                    $selections[] = $item;
-                    $total += $items[$item];
-                }
-            }
+
+try {
+    $bdd = new PDO('mysql:host=localhost;dbname=mydb;port=3307;', 'root', 'Ressorts999!');
+} catch (Exception $e) {
+    die('Erreur : ' . $e->getMessage());
+} //Fonction pour query n°1
+$reponse = $bdd->query('SELECT * FROM products WHERE quantity !=0 '); //On rentre les requêtes SQL, dans notre cas on veux faire apparaitre tout les articles 
+
+
+while ($donnees = $reponse->fetch()) { /*Pour faire apparaitre chaque articles, il faut créer une boucle While "tant que" tout les articles ne sont pas affichés
+    On stock dans un tableau "$donnees" (array) chaque résultat de la boucle "fetch()". 
+     cette ligne récupère une nouvelle entrée et place son contenu dans $donnees ; elle vérifie si $donnees  vaut vrai ou faux.
+    fetch  renvoie faux ( false  ) dans $donnees  lorsqu'il est arrivé à la fin des données, 
+    c'est-à-dire quand toutes les entrées ont été passées en revue. Dans ce cas, la condition du while  vaut "faux" et la boucle s'arrête.*/
+    displayItemAvailable($donnees['name'], $donnees['price'], $donnees['picture'], $donnees['quantity']);
+}
+
+//Créer Objet depuis la BDD
+
+
+
+
+$reponse->closeCursor();
+$article = new article($article['id'], $article['name'], $article['descrpition'], $article['price'], $article['picture'], $article['weight'], $article['quantity'], $article['available'])
+
+?>
+
+<?php //Fonction pour query n°2
+$reponse = $bdd->query('SELECT * FROM products WHERE quantity = 0');
+while ($donnees = $reponse->fetch()) {
+?>
+
+    <p>
+        <strong> PRODUITS INDISPONIBLES</strong>
+    </p> <?php
+            displayItemNotAvailable($donnees['name'], $donnees['price'], $donnees['picture']);
         }
-        ?>
+        $reponse->closeCursor();
+            ?>
 
 
 
-        <?php foreach ($items as $item) {
-            displayItem($item['name'], $item['price'], $item['picture']);
-        ?>
-
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" name="Item[]" value="<?= $item['price'] ?>">
-                    <?= $item['price'] ?> $
-                </label>
-            </div>
-        <?php
-        }
-        ?>
 
 
-        <button type="submit"> Valider Panier</button>
-    </form>
+<input type="submit" form action="basket.php" name="add" /> Valider Panier</button>
+</form>
 
 
 
-    </form>
+</form>
 
 
 </body>

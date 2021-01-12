@@ -1,9 +1,11 @@
 <?php
 include_once('catalogue.php'); // identique à include
-global $items; // "import" de la variable dans ce fichier
+global $bdd; // "import" de la variable dans ce fichier
 
 //var_dump($_POST['qt']);
 ?>
+
+
 <?php foreach ($items as  $index => $item) { ?>
     <?php echo $item["name"]; ?><br>
     <?php echo $item["picture"]; ?> m<br>
