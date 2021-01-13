@@ -76,5 +76,18 @@ function displayCat()
         }
 }
 
+function displayClient(Client $client){
+    echo $client->getFirstName()  . ' ' . $client->getLastName() .' <br />' . $client->getId() . ' <br /> ';
+     
+     
+
+
+}
+
+function displayListeClients(ListeClients $liste_clients) {
+    foreach ($liste_clients->getliste_clients() as $personnes) {
+        displayClient($personnes);
+     }
+}
 
 ?>

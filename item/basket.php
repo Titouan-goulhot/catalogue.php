@@ -1,5 +1,6 @@
 <?php
 include_once('catalogue.php'); // identique à include
+include_once('class_articles.php')
 global $bdd; // "import" de la variable dans ce fichier
 
 //var_dump($_POST['qt']);

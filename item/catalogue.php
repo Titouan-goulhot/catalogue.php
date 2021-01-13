@@ -28,14 +28,17 @@
 
 include_once('functions.php');
 include_once('class_catalogue.php');
+
 include_once('class_articles.php');
-include_once('basket.php');
+include_once('class_chaussure.php');
+
+
 
 
 
 
 try {
-    $bdd = new PDO('mysql:host=localhost;dbname=mydb;port=3307;', 'root', 'Ressorts999!');
+    $bdd = new PDO('mysql:host=localhost;dbname=mydb;port=3306;', 'root', 'root');
 } catch (Exception $e) {
     die('Erreur : ' . $e->getMessage());
 } //Fonction pour query n°1
@@ -52,11 +55,11 @@ while ($donnees = $reponse->fetch()) { /*Pour faire apparaitre chaque articles, 
 
 //Créer Objet depuis la BDD
 
-
+$catalogue = new catalogue;
 
 
 $reponse->closeCursor();
-$article = new article($article['id'], $article['name'], $article['descrpition'], $article['price'], $article['picture'], $article['weight'], $article['quantity'], $article['available'])
+
 
 ?>
 

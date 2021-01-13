@@ -60,4 +60,7 @@ class article
     {
         return $this->available;
     }
+
+    
+
 }

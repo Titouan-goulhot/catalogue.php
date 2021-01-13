@@ -20,7 +20,7 @@
                 }
                 ?> <br />
 
-                <input type="number" name="prix" value="Le prix de vente" />
+                <input type="number" name="price" value="0" min=0 /> 
                 <?php
                 if (isset($_GET["prix"]) && $_GET["prix"] === "empty") {
                     echo "<p>Price is empty</p>";
